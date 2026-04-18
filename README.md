@@ -12,7 +12,7 @@ First, set your Anthropic API key as an environment variable:
 set ANTHROPIC_API_KEY=your_api_key_here
 ```
 
-Next, navigate to your project directory and install the dependencies:
+Next, navigate to your project directory and install the dependency:
 ```bash
 pip install rich
 ```
