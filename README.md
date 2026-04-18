@@ -21,8 +21,8 @@ Rich is used for showing markdown formatting in the terminal.
 ### Customizing
 Default name is John
 
-- Modify `config.py` to change selected model, max tokens, and persona (User;s name is also found here)
+- Modify `config.py` to change selected model, max tokens, and persona (User's name is also found here)
 - Modify `tools.py` to modify the tools the AI has access to
 
 ## Running the Project
-To run the project, run the 'run_chat.bat' file
+To run the project, run the `run_chat.bat` file
