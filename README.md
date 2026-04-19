@@ -18,7 +18,9 @@ pip install rich
 ```
 Rich is used for showing markdown formatting in the terminal.
 
-Finally, create a folder named `Context`. In this folder, you can add files that the AI can read or write to.
+Additionally, create a folder named `Context`. In this folder, you can add files that the assistant can read or write to.
+
+Finally, create a folder named `Projects` if you would like to import your own projects that the assistant can manage. The assistant will automatically create this folder if it ever builds a project on its own.
 
 ### Customizing
 Default name is John and default Timezone is EST
