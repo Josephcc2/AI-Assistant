@@ -17,7 +17,7 @@ Next, navigate to your project directory and install the dependency:
 pip install rich
 ```
 Rich is used for showing markdown formatting in the terminal.
-
+---
 Additionally, create a folder named `Context`. In this folder, you can add files that the assistant can read or write to.
 
 Finally, create a folder named `Projects` if you would like to import your own projects that the assistant can manage. The assistant will automatically create this folder if it ever builds a project on its own.
