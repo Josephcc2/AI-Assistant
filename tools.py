@@ -336,7 +336,7 @@ tools = [
     {
         "name": "memory",
         "description": (
-            "Read or update your long-term memory about Joseph. "
+            "Read or update your long-term memory about John. "
             "Use action='read' to retrieve current memory before updating. "
             "Use action='write' to overwrite the memory file with updated content. "
             "Always read first, then merge existing memory with new information before writing. "
