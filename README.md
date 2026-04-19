@@ -23,9 +23,6 @@ Additionally, create a folder named `Context`. In this folder, you can add files
 
 Finally, create a folder named `Projects` if you would like to import your own projects that the assistant can manage. The assistant will automatically create this folder if it ever builds a project on its own.
 
----
-To start the assistant, run the `run_chat.bat` file
-
 ### Customizing
 Default name is John and default Timezone is EST
 
@@ -41,10 +38,14 @@ To run the project, run the `run_chat.bat` file
 - `create_tool` Creates a markdown file with the layout for a new tool. Only runs when user asks and the tool must be implemented by the user before it is functional
 - `memory` Dynamically stores memory about the user. Runs whenever the user exits out of the program. (Only works if the user types "exit" or "quit" to leave instead of closing the terminal from the close button)
 - `read_code` Allows the AI to read, but not write to, its own source code when asked by the user or if necessary
+
 **Context**
+  
 - `read_context` Allows the AI to read context that has been given to the use in the `Context` folder
 - `write_context` Allows the AI to write to/create new files in the `Context` folder
+
 **Projects**
+
 - `create_project`
 - `list_projects`
 - `read_project_file`
