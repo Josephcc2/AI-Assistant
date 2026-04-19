@@ -17,6 +17,7 @@ Next, navigate to your project directory and install the dependency:
 pip install rich
 ```
 Rich is used for showing markdown formatting in the terminal.
+
 ---
 Additionally, create a folder named `Context`. In this folder, you can add files that the assistant can read or write to.
 
