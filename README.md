@@ -23,6 +23,9 @@ Additionally, create a folder named `Context`. In this folder, you can add files
 
 Finally, create a folder named `Projects` if you would like to import your own projects that the assistant can manage. The assistant will automatically create this folder if it ever builds a project on its own.
 
+---
+To start the assistant, run the `run_chat.bat` file
+
 ### Customizing
 Default name is John and default Timezone is EST
 
