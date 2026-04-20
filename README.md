@@ -35,7 +35,7 @@ To run the project, run the `run_chat.bat` file
 ## Features
 - Ability to dynamically write to memory
 - Can create Projects, which are self-contained file systems that the assistant can read/write/delete to, but cannot execute
-- User can input files into a Context folder, which the assistant reference and can read/write to
+- User can input files into a Context folder, which the assistant can reference and read/write to
 - Assistant can search the web
 - Assistant can suggest tool implementation
 - Assistant can save responses when asked
