@@ -1,5 +1,5 @@
 # AI-Assistant
-Personal helper for your computer using Anthropic's API
+Agentic AI Agent and personal helper for your computer using Anthropic's API
 
 Only tested on Windows
 
