@@ -55,9 +55,9 @@ To run the project, run the `run_chat.bat` file
 
 **Projects**
 
-- `create_project`
-- `list_projects`
-- `read_project_file`
-- `write_project_file`
-- `delete_project_file`
-- `delete_project`
+- `create_project` Creates a new project folder with a README
+- `list_projects` Shows the assistant all projects or all files within a project
+- `read_project_file` Reads a selected file within a project
+- `write_project_file` Writes or patches to a file within a project
+- `delete_project_file` Deletes a file within a project
+- `delete_project` Deletes a whole project, required hard-coded user verification
