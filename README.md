@@ -27,7 +27,7 @@ Finally, create a folder named `Projects` if you would like to import your own p
 Default name is John and default Timezone is EST
 
 - Modify `config.py` to change selected model, max tokens, and persona (User's name is also found here)
-- Modify `tools.py` to modify the tools the assistant has access to
+- Modify `tools/` to modify the tools the assistant has access to
 
 ## Running the Project
 To run the project, run the `run_chat.bat` file
