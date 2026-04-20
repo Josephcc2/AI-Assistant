@@ -38,6 +38,7 @@ To run the project, run the `run_chat.bat` file
 - User can input files into a Context folder, which the assistant can reference and read/write to
 - Assistant can search the web
 - Assistant can suggest tool implementations
+- Dynamic tool integration with assistant
 - Assistant can save responses when asked
 - Assistant can read, but not write to, its own source code
 
