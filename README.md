@@ -37,7 +37,7 @@ To run the project, run the `run_chat.bat` file
 - Can create Projects, which are self-contained file systems that the assistant can read/write/delete to, but cannot execute
 - User can input files into a Context folder, which the assistant can reference and read/write to
 - Assistant can search the web
-- Assistant can suggest tool implementation
+- Assistant can suggest tool implementations
 - Assistant can save responses when asked
 - Assistant can read, but not write to, its own source code
 
