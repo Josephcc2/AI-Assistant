@@ -4,6 +4,8 @@ Agentic AI Agent and personal helper for your computer using Anthropic's API
 Only tested on Windows
 
 ## Setup
+(An Antrhopic API key is required. $5 - $10 will get you *plenty* of responses)
+
 Ensure you have Python latest release installed on your system.
 
 First, set your Anthropic API key as an environment variable:
