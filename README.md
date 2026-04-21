@@ -46,6 +46,8 @@ To run the project, run the `run_chat.bat` file
 - `web_search` Allows the assistant to use Anthropic's built in web search
 - `save_resposne` Allows the assistant to save text to a markdown file at the user's discretion
 - `create_tool` Creates a markdown file with the layout for a new tool. Only runs when user asks and the tool must be implemented by the user before it is functional
+- `list_suggested` Shows the assistant all tools created in the SuggestedTools folder (not yet active)
+- `implement_tool` Implement a suggested tool into the live codebase at the user's approval
 - `memory` Dynamically stores memory about the user. Runs whenever the user exits out of the program. (Only works if the user types "exit" or "quit" to leave instead of closing the terminal from the close button)
 - `read_code` Allows the assistant to read, but not write to, its own source code when asked by the user or if necessary
 
