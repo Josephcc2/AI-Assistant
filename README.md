@@ -8,13 +8,19 @@ Only tested on Windows
 
 Ensure you have Python latest release installed on your system.
 
-First, set your Anthropic API key as an environment variable:
+First, install the Anthropic SDK:
+
+```bash
+pip install anthropic
+```
+
+Next, set your Anthropic API key as an environment variable:
 
 ```bash
 set ANTHROPIC_API_KEY=your_api_key_here
 ```
 
-Next, navigate to your project directory and install the dependency:
+Finally, navigate to your project directory and install the dependency:
 ```bash
 pip install rich
 ```
@@ -48,7 +54,7 @@ To run the project, run the `run_chat.bat` file
 ## Tools
 - `web_search` Allows the assistant to use Anthropic's built in web search
 - `save_resposne` Allows the assistant to save text to a markdown file at the user's discretion
-- `create_tool` Creates a markdown file with the layout for a new tool. Only runs when user asks and the tool must be implemented by the user before it is functional
+- `create_tool` Creates a Python file with the layout for a new tool. Only runs when user asks and the tool must be implemented by the user before it is functional
 - `list_suggested` Shows the assistant all tools created in `SuggestedTools/` (not yet active)
 - `implement_tool` Implement a suggested tool into the live codebase at the user's approval
 - `memory` Dynamically stores memory about the user. Runs whenever the user exits out of the program. (Only works if the user types "exit" or "quit" to leave instead of closing the terminal from the close button)
