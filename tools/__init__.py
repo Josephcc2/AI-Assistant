@@ -1,7 +1,7 @@
-from tools import meta, memory, files, context, projects
+from tools import meta, memory, files, context, projects, custom, implement
 
 # All tool schemas assembled in one list for the API
-_modules = [meta, memory, files, context, projects]
+_modules = [meta, memory, files, context, projects, custom, implement]
 
 tools = []
 for _mod in _modules:
