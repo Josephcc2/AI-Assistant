@@ -1,6 +1,7 @@
 import os
 
 TOOLS_DIR = os.path.join(os.path.dirname(__file__))
+SAVED_RESPONSES_DIR = "SavedResponses"
 
 STATIC_FILES = {
     "chat.py": "chat.py",
@@ -21,13 +22,17 @@ def _readable_files():
 def save_response_to_md(tool_input):
     response_text = tool_input.get("response")
     filename = tool_input.get("filename", "saved_responses.md")
-
+ 
     if not response_text:
         return "Error: 'response' is required but was not provided."
-
-    with open(filename, "a", encoding="utf-8") as f:
+ 
+    os.makedirs(SAVED_RESPONSES_DIR, exist_ok=True)
+    path = os.path.join(SAVED_RESPONSES_DIR, os.path.basename(filename))
+ 
+    with open(path, "a", encoding="utf-8") as f:
         f.write(response_text + "\n\n---\n\n")
-    return f"Response written to {filename}"
+    return f"Response written to {path}"
+
 
 
 def read_code(tool_input):
