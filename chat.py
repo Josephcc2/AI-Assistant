@@ -61,36 +61,51 @@ def ConsolidateMemory(client, messages, systemPrompt):
         "role": "user",
         "content": consolidation_prompt
     }]
- 
+
     # Run agentic loop until the AI finishes updating memory
-    while True:
-        response = AIRespond(client, consolidation_messages, systemPrompt)
-        consolidation_messages.append({"role": "assistant", "content": response.content})
- 
-        if response.stop_reason == "end_turn":
-            orphaned = [
-                {"type": "tool_result", "tool_use_id": block.id, "content": ""}
-                for block in response.content if block.type == "tool_use"
-            ]
-            if orphaned:
-                consolidation_messages.append({"role": "user", "content": orphaned})
-                continue
-            break
- 
-        elif response.stop_reason == "tool_use":
-            tool_results = []
-            for block in response.content:
-                if block.type == "tool_use":
-                    result = run_tool(block.name, block.input)
-                    tool_results.append({
-                        "type": "tool_result",
-                        "tool_use_id": block.id,
-                        "content": result
-                    })
-            consolidation_messages.append({"role": "user", "content": tool_results})
- 
-        else:
-            break
+    try:
+        while True:
+            response = AIRespond(client, consolidation_messages, systemPrompt)
+            consolidation_messages.append({"role": "assistant", "content": response.content})
+    
+            if response.stop_reason == "end_turn":
+                orphaned = [
+                    {"type": "tool_result", "tool_use_id": block.id, "content": ""}
+                    for block in response.content if block.type == "tool_use"
+                ]
+                if orphaned:
+                    consolidation_messages.append({"role": "user", "content": orphaned})
+                    continue
+                break
+    
+            elif response.stop_reason == "tool_use":
+                tool_results = []
+                for block in response.content:
+                    if block.type == "tool_use":
+                        result = run_tool(block.name, block.input)
+                        tool_results.append({
+                            "type": "tool_result",
+                            "tool_use_id": block.id,
+                            "content": result
+                        })
+                consolidation_messages.append({"role": "user", "content": tool_results})
+    
+            else:
+                break
+    
+    except anthropic.RateLimitError:
+        console.print("[bold red]⚠ Rate limit hit during memory save. Writing emergency note...[/bold red]")
+        emergency_note = (
+            "\n\n## ⚠ Emergency Note (Auto-written)\n"
+            "- Session was interrupted by a rate limit error during memory consolidation.\n"
+            "- Memory may be incomplete. Review conversation history on next session.\n"
+        )
+        try:
+            with open(memoryPath, "a", encoding="utf-8") as f:
+                f.write(emergency_note)
+            console.print("[dim]Emergency note appended to memory file.[/dim]")
+        except Exception as file_err:
+            console.print(f"[bold red]Failed to write emergency note: {file_err}[/bold red]")
  
     console.print("[dim]Memory saved.[/dim]\n")
 
@@ -132,31 +147,45 @@ def main():
         ClearConsole()
 
         # Agentic Loop
-        while True:
-            response = AIRespond(client, messages, systemPrompt)
-            messages.append({"role": "assistant", "content": response.content})
+        try:
+            while True:
+                response = AIRespond(client, messages, systemPrompt)
+                messages.append({"role": "assistant", "content": response.content})
+                
+                # Collect And Execute Any Tool Calls In This Response
+                tool_results = []
+                for block in response.content:
+                    if block.type == "tool_use":
+                        console.print(f"[dim][Calling tool: {block.name}][/dim]\n")
+                        result = run_tool(block.name, block.input)
+                        tool_results.append({
+                            "type": "tool_result",
+                            "tool_use_id": block.id,
+                            "content": result
+                        })
+                    elif block.type == "server_tool_use" and block.name == "web_search":
+                        console.print(f"[dim][Calling tool: web_search][/dim]\n")
+
+                if tool_results:
+                    messages.append({"role": "user", "content": tool_results})
+                    continue
+
+                # No tool calls — print response and exit loop
+                PrintResponse(response.content)
+                break
             
-            # Collect And Execute Any Tool Calls In This Response
-            tool_results = []
-            for block in response.content:
-                if block.type == "tool_use":
-                    console.print(f"[dim][Calling tool: {block.name}][/dim]\n")
-                    result = run_tool(block.name, block.input)
-                    tool_results.append({
-                        "type": "tool_result",
-                        "tool_use_id": block.id,
-                        "content": result
-                    })
-                elif block.type == "server_tool_use" and block.name == "web_search":
-                    console.print(f"[dim][Calling tool: web_search][/dim]\n")
-
-            if tool_results:
-                messages.append({"role": "user", "content": tool_results})
-                continue
-
-            # No tool calls — print response and exit loop
-            PrintResponse(response.content)
-            break
+        except anthropic.RateLimitError:
+            console.print("\n[bold yellow]⚠ Rate limit reached. Saving progress and exiting safely...[/bold yellow]\n")
+            # Inject a note so memory consolidation captures the interruption
+            messages.append({
+                "role": "user",
+                "content": "SYSTEM NOTE: The session was interrupted by a rate limit error. "
+                        "Please make sure to save any work-in-progress details, current task state, "
+                        "and what was being worked on to long-term memory."
+            })
+            ConsolidateMemory(client, messages, systemPrompt)
+            console.print("[bold red]Session ended due to rate limit. Progress saved.[/bold red]")
+            break  # breaks out of the outer chat while loop
 
 if __name__ == "__main__":
     main()
